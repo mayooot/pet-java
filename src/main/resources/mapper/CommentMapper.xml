@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexu.petproject.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.hexu.petproject.model.pojo.Comment">
+    <!--@mbg.generated-->
+    <!--@Table pms_comment-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="star" jdbcType="INTEGER" property="star" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="is_pic" jdbcType="TINYINT" property="isPic" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <resultMap id="abc666" type="com.hexu.petproject.model.vo.commentVO.CommentVO">
+    <id property="userId" column="userId"/>
+    <result property="userName" column="userName"/>
+    <result property="content" column="content"/>
+    <result property="commentId" column="commentId"/>
+    <result property="addTime" column="addTime"/>
+    <result property="star" column="star"/>
+    <result property="spuId" column="spuId"/>
+    <result property="headUrl" column="headUrl"/>
+   <!-- <collection property="imgList" ofType="java.lang.String">
+      <constructor>
+        <arg column="imgList"/>
+      </constructor>
+    </collection>-->
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, spu_id, user_id, star, content, is_pic, created_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hexu.petproject.model.pojo.Comment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="star != null">
+        star,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="isPic != null">
+        is_pic,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="star != null">
+        #{star,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isPic != null">
+        #{isPic,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hexu.petproject.model.pojo.Comment">
+    <!--@mbg.generated-->
+    update pms_comment
+    <set>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="star != null">
+        star = #{star,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isPic != null">
+        is_pic = #{isPic,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="list" resultMap="abc666">
+    SELECT pms_sku.spu_id as spuId,ums_user.head_url as headUrl, pms_comment.id as commentId,
+    pms_comment.user_id as userId,pms_comment.star as star,pms_comment.content as content,pms_comment.created_time as
+    addTime,
+    ums_user.user_name as userName
+    FROM pms_sku
+    LEFT JOIN pms_comment on pms_comment.spu_id = pms_sku.spu_id       and pms_sku.id = #{spuId}
+ #   LEFT JOIN pms_comment_pic on pms_comment_pic.comment_id = pms_comment.id
+
+    LEFT JOIN ums_user on ums_user.id = pms_comment.user_id
+<where>
+  <if test="isPic != null and isPic != ''">
+    and pms_comment.is_pic = #{isPic}
+  </if>
+</where>
+limit #{startIndex},#{pageSize}
+    </select>
+
+  <select id="countByPrimaryKey" resultType="java.lang.Integer">
+    select count(totol.id) from (
+    SELECT pms_comment.id
+    FROM pms_sku
+    LEFT JOIN pms_comment on pms_comment.spu_id = pms_sku.spu_id and pms_sku.id = #{spuId}
+    LEFT JOIN pms_comment_pic on pms_comment_pic.comment_id = pms_comment.id
+    LEFT JOIN ums_user on ums_user.id = pms_comment.user_id
+
+    <where>
+      <if test="isPic != null and isPic != ''">
+        and pms_comment.is_pic = #{isPic}
+      </if>
+    </where>
+                                ) as totol
+  </select>
+</mapper>

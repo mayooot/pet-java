@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexu.petproject.mapper.SpuMapper">
+  <resultMap id="BaseResultMap" type="com.hexu.petproject.model.pojo.Spu">
+    <!--@mbg.generated-->
+    <!--@Table pms_spu-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="cid1" jdbcType="BIGINT" property="cid1" />
+    <result column="cid2" jdbcType="BIGINT" property="cid2" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="sale" jdbcType="INTEGER" property="sale" />
+    <result column="comment_total_score" jdbcType="INTEGER" property="commentTotalScore" />
+    <result column="comment_amount" jdbcType="INTEGER" property="commentAmount" />
+    <result column="product_specification" jdbcType="VARCHAR" property="productSpecification" />
+    <result column="default_price" jdbcType="DECIMAL" property="defaultPrice" />
+    <result column="default_pic_url" jdbcType="VARCHAR" property="defaultPicUrl" />
+    <result column="publish_status" jdbcType="TINYINT" property="publishStatus" />
+    <result column="verify_status" jdbcType="TINYINT" property="verifyStatus" />
+    <result column="valid" jdbcType="BOOLEAN" property="valid" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, brand_id, cid1, cid2, `name`, sub_title, sale, comment_total_score, comment_amount, 
+    product_specification, default_price, default_pic_url, publish_status, verify_status, 
+    `valid`, created_time, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pms_spu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pms_spu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hexu.petproject.model.pojo.Spu" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pms_spu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="cid1 != null">
+        cid1,
+      </if>
+      <if test="cid2 != null">
+        cid2,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="subTitle != null">
+        sub_title,
+      </if>
+      <if test="sale != null">
+        sale,
+      </if>
+      <if test="commentTotalScore != null">
+        comment_total_score,
+      </if>
+      <if test="commentAmount != null">
+        comment_amount,
+      </if>
+      <if test="productSpecification != null">
+        product_specification,
+      </if>
+      <if test="defaultPrice != null">
+        default_price,
+      </if>
+      <if test="defaultPicUrl != null">
+        default_pic_url,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
+      <if test="verifyStatus != null">
+        verify_status,
+      </if>
+      <if test="valid != null">
+        `valid`,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="cid1 != null">
+        #{cid1,jdbcType=BIGINT},
+      </if>
+      <if test="cid2 != null">
+        #{cid2,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null">
+        #{sale,jdbcType=INTEGER},
+      </if>
+      <if test="commentTotalScore != null">
+        #{commentTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="commentAmount != null">
+        #{commentAmount,jdbcType=INTEGER},
+      </if>
+      <if test="productSpecification != null">
+        #{productSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultPrice != null">
+        #{defaultPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultPicUrl != null">
+        #{defaultPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null">
+        #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=BOOLEAN},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hexu.petproject.model.pojo.Spu">
+    <!--@mbg.generated-->
+    update pms_spu
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="cid1 != null">
+        cid1 = #{cid1,jdbcType=BIGINT},
+      </if>
+      <if test="cid2 != null">
+        cid2 = #{cid2,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null">
+        sale = #{sale,jdbcType=INTEGER},
+      </if>
+      <if test="commentTotalScore != null">
+        comment_total_score = #{commentTotalScore,jdbcType=INTEGER},
+      </if>
+      <if test="commentAmount != null">
+        comment_amount = #{commentAmount,jdbcType=INTEGER},
+      </if>
+      <if test="productSpecification != null">
+        product_specification = #{productSpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultPrice != null">
+        default_price = #{defaultPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultPicUrl != null">
+        default_pic_url = #{defaultPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null">
+        verify_status = #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="valid != null">
+        `valid` = #{valid,jdbcType=BOOLEAN},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+</mapper>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hexu.petproject.mapper.SkuMapper">
+    <resultMap id="BaseResultMap" type="com.hexu.petproject.model.pojo.Sku">
+        <!--@mbg.generated-->
+        <!--@Table pms_sku-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="spu_id" jdbcType="BIGINT" property="spuId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="sale" jdbcType="INTEGER" property="sale"/>
+        <result column="indexes" jdbcType="VARCHAR" property="indexes"/>
+        <result column="product_sku_specification" jdbcType="VARCHAR" property="productSkuSpecification"/>
+        <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
+        <result column="valid" jdbcType="BOOLEAN" property="valid"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime"/>
+    </resultMap>
+    <resultMap id="abc666" type="com.hexu.petproject.model.vo.skuVO.SkuList">
+        <id column="id" property="id"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="title" property="title"/>
+        <result column="price" property="price"/>
+        <result column="unit" property="unit"/>
+        <result column="stock" property="stock"/>
+        <result column="product_sku_specification" jdbcType="VARCHAR" property="productSkuSpecification"/>
+        <collection property="skuPicList" ofType="com.hexu.petproject.model.vo.skuVO.SkuPicList">
+            <id property="id" column="id2"/>
+            <result property="skuId" column="sku_id2"/>
+            <result property="picUrl" column="pic_url2"/>
+            <result property="isDefault" column="is_default2"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, spu_id, title, price, unit, stock, sale, indexes, product_sku_specification,
+        is_default, `valid`, created_time, updated_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from pms_sku
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from pms_sku
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hexu.petproject.model.pojo.Sku"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pms_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="spuId != null">
+                spu_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="sale != null">
+                sale,
+            </if>
+            <if test="indexes != null">
+                indexes,
+            </if>
+            <if test="productSkuSpecification != null">
+                product_sku_specification,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+            <if test="valid != null">
+                `valid`,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="spuId != null">
+                #{spuId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="sale != null">
+                #{sale,jdbcType=INTEGER},
+            </if>
+            <if test="indexes != null">
+                #{indexes,jdbcType=VARCHAR},
+            </if>
+            <if test="productSkuSpecification != null">
+                #{productSkuSpecification,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=TINYINT},
+            </if>
+            <if test="valid != null">
+                #{valid,jdbcType=BOOLEAN},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hexu.petproject.model.pojo.Sku">
+        <!--@mbg.generated-->
+        update pms_sku
+        <set>
+            <if test="spuId != null">
+                spu_id = #{spuId,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="sale != null">
+                sale = #{sale,jdbcType=INTEGER},
+            </if>
+            <if test="indexes != null">
+                indexes = #{indexes,jdbcType=VARCHAR},
+            </if>
+            <if test="productSkuSpecification != null">
+                product_sku_specification = #{productSkuSpecification,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=TINYINT},
+            </if>
+            <if test="valid != null">
+                `valid` = #{valid,jdbcType=BOOLEAN},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getProductSearchCondition" resultType="com.hexu.petproject.model.vo.skuVO.ProductVO">
+        select pms_sku.id,
+        title as name,
+        pms_sku.sale,
+        price as defaultPrice,
+        pms_spu.default_pic_url as defaultPicUrl
+        from pms_sku
+        left join pms_sku_pic on pms_sku_pic.sku_id = pms_sku.id
+        left join pms_spu on pms_spu.id = pms_sku.spu_id
+        left join pms_product_attribute_rel on pms_product_attribute_rel.spu_id = pms_spu.id
+        left join pms_product_attribute
+        on pms_product_attribute.id = pms_product_attribute_rel.product_attribute_id
+        <where>
+            pms_sku.is_default = 1
+            GROUP BY pms_sku.id
+
+            <if test="brandId != null and brandId != ''">
+                and brand_id = #{brandId,jdbcType=INTEGER}
+            </if>
+            <if test="productCategoryId != null  and productCategoryId != ''">
+                and cid2 = #{productCategoryId,jdbcType=INTEGER}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and title like concat('%', #{keyword,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="productAttributeIds != null and productAttributeIds.size() != 0">
+                and pms_product_attribute_rel.product_attribute_id in
+                <foreach collection="productAttributeIds" item="item" open="(" separator="," close=")">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="sort != null and sort != ''">
+                order by
+                <choose>
+                    <when test="sort == 1">
+                        pms_product_attribute.created_time desc
+                    </when>
+                    <when test="sort == 2">
+                        pms_spu.sale desc
+                    </when>
+                    <when test="sort == 3">
+                        pms_spu.comment_total_score desc
+                    </when>
+                    <otherwise>
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="countByPrimaryKey" resultType="java.lang.Integer">
+        select count(totol.id) from (
+        select pms_sku.id
+        from pms_sku
+        left join pms_sku_pic on pms_sku_pic.sku_id = pms_sku.id
+        left join pms_spu on pms_spu.id = pms_sku.spu_id
+        left join pms_product_attribute_rel on pms_product_attribute_rel.spu_id = pms_spu.id
+        left join pms_product_attribute
+        on pms_product_attribute.id = pms_product_attribute_rel.product_attribute_id
+        <where>
+            pms_sku.is_default = 1
+            GROUP BY pms_sku.id
+            <if test="brandId != null  and brandId != ''">
+                and brand_id = #{brandId,jdbcType=INTEGER}
+            </if>
+            <if test="productCategoryId != null  and productCategoryId != ''">
+                and cid2 = #{productCategoryId,jdbcType=INTEGER}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and title like concat('%', #{keyword,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="productAttributeIds != null and productAttributeIds.size() != 0">
+                and pms_product_attribute_rel.product_attribute_id in
+                <foreach collection="productAttributeIds" item="item" open="(" separator="," close=")">
+                    #{item,jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="sort != null and sort != ''">
+                order by
+                <choose>
+                    <when test="sort == 1">
+                        pms_product_attribute.created_time desc
+                    </when>
+                    <when test="sort == 2">
+                        pms_spu.sale desc
+                    </when>
+                    <when test="sort == 3">
+                        pms_spu.comment_total_score desc
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ) as totol
+    </select>
+
+    <select id="getSkuBySpuOne" resultType="com.hexu.petproject.model.vo.skuVO.SpuVO">
+        select pms_sku.spu_id as spuId,
+               pms_spu.id,
+               pms_spu.sub_title,
+               pms_spu.sale,
+               pms_spu.comment_total_score,
+               pms_spu.comment_amount,
+               pms_spu.product_specification,
+               pms_spu.name,
+               pms_spu.cid1,
+               pms_spu.cid2
+        from pms_sku
+                 left join pms_spu on pms_sku.spu_id = pms_spu.id
+        where pms_sku.id = #{id}
+    </select>
+
+    <select id="skuList" resultMap="abc666">
+        select pms_sku.id,
+               pms_sku.spu_id,
+               pms_sku.title,
+               pms_sku.price,
+               pms_sku.unit,
+               pms_sku.stock,
+               pms_sku.sale,
+               pms_sku.product_sku_specification,
+               pms_product_detail_pic.id      as id2,
+               pms_sku.id                     as sku_id2,
+               pms_product_detail_pic.pic_url as pic_url2,
+               pms_sku.is_default             as is_default2
+        from pms_sku
+                 left join pms_product_detail_pic on pms_product_detail_pic.spu_id = pms_sku.spu_id
+        where pms_sku.spu_id = #{spuId}
+          and pms_sku.is_default = 1
+    </select>
+
+    <select id="getById" resultType="java.lang.Long">
+        select spu_id
+        from pms_sku
+        where id = #{id}
+    </select>
+
+    <select id="selectCartVOBySkuId" resultType="com.hexu.petproject.model.vo.cartVO.CartVo">
+        select pms_spu.id                        as spu_id,
+               pms_sku.id                        as sku_id,
+               pms_sku.product_sku_specification as product_sku_specification,
+               pms_sku.title,
+               pms_spu.default_pic_url           as pic_url,
+               pms_sku.price                     as unit_price,
+               pms_sku.unit,
+               pms_sku.stock                     as max,
+               pms_spu.publish_status
+        from pms_sku
+                 left join pms_spu on pms_spu.id = pms_sku.spu_id
+        where pms_sku.id = #{skuId}
+    </select>
+
+    <update id="deductedInventory">
+        update pms_sku
+        set stock = (stock - #{skuNum,jdbcType=INTEGER}),
+            sale  = (sale + #{skuNum,jdbcType=INTEGER})
+        where id = #{skuId,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,102 @@
+{
+  "groups": [
+    {
+      "name": "aliyun",
+      "type": "com.hexu.petproject.config.AiliyunConfig",
+      "sourceType": "com.hexu.petproject.config.AiliyunConfig"
+    },
+    {
+      "name": "aliyun.oss",
+      "type": "com.hexu.petproject.config.AiliyunOssConfig",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.sms",
+      "type": "com.hexu.petproject.config.AiliyunSmsConfig",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "threadpoolexecutor.thread",
+      "type": "com.hexu.petproject.config.ThreadPoolConfig",
+      "sourceType": "com.hexu.petproject.config.ThreadPoolConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aliyun.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunConfig"
+    },
+    {
+      "name": "aliyun.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunConfig"
+    },
+    {
+      "name": "aliyun.oss.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.oss.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.oss.bucket-name",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.oss.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.oss.prefix",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunOssConfig"
+    },
+    {
+      "name": "aliyun.sms.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "aliyun.sms.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "aliyun.sms.endpo-int",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "aliyun.sms.sign-name",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "aliyun.sms.template-code",
+      "type": "java.lang.String",
+      "sourceType": "com.hexu.petproject.config.AiliyunSmsConfig"
+    },
+    {
+      "name": "threadpoolexecutor.thread.core-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.hexu.petproject.config.ThreadPoolConfig"
+    },
+    {
+      "name": "threadpoolexecutor.thread.keep-alive-time",
+      "type": "java.lang.Integer",
+      "sourceType": "com.hexu.petproject.config.ThreadPoolConfig"
+    },
+    {
+      "name": "threadpoolexecutor.thread.max-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.hexu.petproject.config.ThreadPoolConfig"
+    }
+  ],
+  "hints": []
+}

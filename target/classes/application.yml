@@ -1,0 +1,65 @@
+server:
+  port: 8080
+spring:
+  rabbitmq:
+    host: 182.92.176.32
+    port: 5672
+    username: root
+    password: Somelikeithot1
+    # 开始发布订阅模式和消息回退机制
+    publisher-confirm-type: correlated
+    publisher-returns: true
+  cache:
+    type: redis
+  redis:
+    port: 6379
+    host: 182.92.176.32
+    password: Somelikeithot1
+  application:
+    name: pet-project
+  datasource:
+    username: root
+    password: root
+    #url中database为对应的数据库名称
+    url: jdbc:mysql://localhost:3306/db_pet?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl    #  数据库中如果有类似 如  user_name 等命名，会将 _后的字母大写，这里是为了和实体类对应
+    #配置驼峰命名
+    map-underscore-to-camel-case: true
+    #映射器位置
+  mapper-locations: classpath:mapper/*.xml
+  #类型别名包
+  type-aliases-package: com.hexu.petproject.model
+# OSS相关配置信息
+aliyun:
+  #阿里云用户信息
+  accessKeyId: LTAI5t65GHuCym1PzwfVc49v # 访问身份验证中用到用户标识
+  accessKeySecret: sEazBhiHYZfeVEqjybkymPGUrLHTNC # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+  #文件上传
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com # oss对外服务的访问域名
+    bucketName: pet-project-imgage # oss的存储空间
+    prefix: pms/product/ # 上传文件夹路径前缀
+  #短信服务
+  sms:
+    signName: "阿里云短信测试"
+    endpoInt: dysmsapi.aliyuncs.com
+    templateCode: SMS_154950909
+#线程池配置
+threadpoolexecutor:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10
+
+logging:
+  level:
+    root: info
+    # mybatis打印输出sql语句
+    com.ming.petproject.mapper: info
+    # 控制器设置日志级别为debug
+    com.ming.petproject.controller: info
+
