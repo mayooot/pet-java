@@ -8,6 +8,7 @@ import com.hexu.petproject.util.RedisUtils;
 import com.hexu.petproject.util.ResultEnum;
 import com.hexu.petproject.util.ResultVO;
 import com.hexu.petproject.util.redis.RedisLock;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0.0
  * @createTime 2022年06月01日 11:45:00
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/product")
 public class OversoldController {
@@ -57,19 +59,28 @@ public class OversoldController {
             return ResultVO.errer(ResultEnum.PRODUCT_TOO_MANY_BUYERS);
         }
 
-        // 获取锁成功
-        // 1. 查库存
-        Sku sku = skuMapper.selectByPrimaryKey(skuId);
-        if (sku.getStock() == 0 || num > sku.getStock()) {
-            // 如果库存为0，或者购买数量大于库存
-            return ResultVO.errer(ResultEnum.NOT_ENOUGH_STOCK);
+
+        try {
+            // 获取锁成功
+            // 1. 查库存
+            Sku sku = skuMapper.selectByPrimaryKey(skuId);
+            if (sku.getStock() == 0 || num > sku.getStock()) {
+                // 如果库存为0，或者购买数量大于库存
+                throw new OmsException(ResultEnum.NOT_ENOUGH_STOCK);
+            }
+
+            // 2. 扣减库存
+            skuService.deductedInventory(skuId, num);
+
+            // 释放锁
+            redisLock.unLockLua(lockKey, lockValue);
+        } catch (OmsException e) {
+            log.info("获取锁成功，但业务执行失败！失败原因：code:{}, cause: {}", e.getCode(), e.getCause());
+        } finally {
+            // 最后释放锁
+            redisLock.unLockLua(lockKey, lockValue);
         }
 
-        // 2. 扣减库存
-        skuService.deductedInventory(skuId, num);
-
-        // 3. 扣减库存
-        redisLock.unLockLua(lockKey, lockValue);
         return ResultVO.ok();
     }
 }
