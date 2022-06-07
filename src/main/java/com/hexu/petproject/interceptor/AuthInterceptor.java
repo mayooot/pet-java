@@ -34,7 +34,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("有个请求进来了,叫{}", request.getRequestURI());
+        // log.info("有个请求进来了,叫{}", request.getRequestURI());
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         //查询对应的请求上有木有对应的注解   有的话说明当前请求不需要验证  直接放行
         Authentication methodAnnotation = handlerMethod.getMethod().getAnnotation(Authentication.class);
