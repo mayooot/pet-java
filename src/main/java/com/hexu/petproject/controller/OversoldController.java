@@ -39,6 +39,15 @@ public class OversoldController {
     @Autowired
     private SkuService skuService;
 
+    /**
+     * 使用redis分布式锁来解决多个同时抢购的问题
+     * 使用SETNX将要抢购的商品ID存在redis里，如果设置成功代表抢到了分布式锁，失败则没有抢到
+     * 删除锁的时候，因为我们设置的商品ID对应的value是线程ID+时间戳，所以使用lua脚本保证每个线程删除的都是自己的锁
+     *
+     * @param skuId
+     * @param num
+     * @return
+     */
     @PostMapping("/oversold")
     public ResultVO oversold(@RequestParam("skuId") Long skuId, @RequestParam("num") Integer num) {
 

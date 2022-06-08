@@ -62,13 +62,14 @@ public enum ResultEnum {
     REVEIVER_ADDRESS_NOT_EXIST_ERROR("41004", "当前收货地址不存在"),
     REDUCE_INVENTORY_ERROR("40003", "扣减商品SKU库存失败"),
     DELETE_CART_ERROR("40004", "清空购物车失败"),
+    REPEAT_ORDER("40005", "请勿重复提交订单"),
 
 
     /**
      * 订单支付
      */
     PAY_ERROR("50001", "支付失败"),
-    PAY_REPEAT("5002", "请勿重复支付/提交"),
+    PAY_REPEAT("50002", "请勿重复支付/提交"),
 
     /**
      * 其他
