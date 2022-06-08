@@ -11,6 +11,16 @@ public class RedisUtils {
 
 
     /**
+     * 用于商品秒杀时存于Redis中的key
+     *
+     * @param skuId 商品id
+     * @return redis key
+     */
+    public static String miaoshaRedisKey(Long skuId) {
+        return "pet:miaosha:" + skuId;
+    }
+
+    /**
      * 用于生成商品购买时存于Redis中的value
      *
      * @param threadId  线程id

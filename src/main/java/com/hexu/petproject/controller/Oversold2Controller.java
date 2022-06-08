@@ -4,10 +4,12 @@ import com.google.common.util.concurrent.RateLimiter;
 import com.hexu.petproject.exception.OmsException;
 import com.hexu.petproject.mapper.MiaoshaSkuMapper;
 import com.hexu.petproject.model.pojo.MiaoshaSku;
+import com.hexu.petproject.util.RedisUtils;
 import com.hexu.petproject.util.ResultEnum;
 import com.hexu.petproject.util.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p>项目文档： 解决超卖问题2 使用乐观锁和令牌桶实现</p>
+ * <p>项目文档： 解决超卖问题2 使用乐观锁+令牌桶+redis实现
+ *  乐观锁解决多个用户同时抢购的问题
+ *  令牌桶实现限流
+ *  redis实现秒杀限时
+ * </p>
  *
  * @author liming
  * @version 1.0.0
@@ -30,6 +36,9 @@ public class Oversold2Controller {
     @Autowired
     private MiaoshaSkuMapper skuMapper;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     // 每秒产生10个令牌
     private RateLimiter rateLimiter = RateLimiter.create(10);
 
@@ -42,6 +51,13 @@ public class Oversold2Controller {
     @PostMapping("/oversold2")
     public ResultVO oversold(@RequestParam("skuId") Long skuId) {
 
+        // 检测redis中秒杀的商品是否超时
+        String redisKey = RedisUtils.miaoshaRedisKey(skuId);
+        if (!stringRedisTemplate.hasKey(redisKey)) {
+            // 如果不存在该键，说明该商品秒杀已经结束
+            log.info("id为{}的商品秒杀活动已经过期！", skuId);
+            return ResultVO.errer(ResultEnum.PRODUCT_KILL_HAS_ENDED);
+        }
         // 加入令牌桶的限流措施
         if (!rateLimiter.tryAcquire(3, TimeUnit.SECONDS)) {
             // 如果3秒内，该请求还是没有获取到令牌，那么就抛弃
