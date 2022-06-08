@@ -60,6 +60,18 @@
                 </TableGenerateConfig>
               </value>
             </entry>
+            <entry key="db_pet:pms_miaosha_sku">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="id" />
+                  <option name="insertMethodEnabled" value="false" />
+                  <option name="javaModelName" value="MiaoshaSku" />
+                  <option name="moduleName" value="pet-project" />
+                  <option name="updateByPrimaykeyEnabled" value="false" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
             <entry key="pet:oms_order">
               <value>
                 <TableGenerateConfig>
