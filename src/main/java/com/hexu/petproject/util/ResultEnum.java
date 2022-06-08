@@ -44,7 +44,6 @@ public enum ResultEnum {
     PRODUCT_INFORMATION_DOES_NOT_EXIST("20005", "对应的商品信息不存在"),
     PRODUCT_STATUS_OFF("20006", "商品已下架"),
     PRODUCT_TOO_MANY_BUYERS("20007", "购买人数过多，等会再试试吧~"),
-    PRODUCT_KILL_HAS_ENDED("20008", "商品秒杀已结束"),
 
     /**
      * 购物车相关
